@@ -50,4 +50,7 @@ decoupe([X1,Y1,Z1|XS],[X2,Y2,Z2|YS],[X3,Y3,Z3|ZS],[[X1,Y1,Z1,X2,Y2,Z2,X3,Y3,Z3]|
 
 /*Question 9:*/
 carres([],[]).
-carres([X,Y,Z|XS],[L2|L]) :- decoupe(X,Y,Z,L2), carre(XS,L).
+carres([X,Y,Z|XS],[L2|L]) :- decoupe(X,Y,Z,L2), carres(XS,L).
+
+/*Question 10:*/
+solution(S):-  bonnetaille(S,9),verifie(CS),bonnetaille(TS,9), verifie(S),verifie(TS),transp(S,TS), carres(S,CS).
