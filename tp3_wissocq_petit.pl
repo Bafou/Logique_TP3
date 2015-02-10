@@ -60,8 +60,13 @@ solution(S):- transp(S,TS), carres(S,CS), bonnetaille(S,9),verifie(CS),bonnetail
 elem([X|_],1,X).
 elem([_|XS],N,R) :- N1 is (N-1), elem(XS,N1,R).
 
-/* diagonale calcule la diagonale de en haut à droite vers en bas à gauche*/
-diagonale([],_,[]).
-diagonale([X|XS],Y,[R|L]) :- Y1 is (Y-1),  elem(X,Y,R), diagonale(XS,Y1,L).
+/* diagonaled donne en 3em position la diagonale de : en haut à droite vers en bas à gauche*/
+diagonaled([],_,[]).
+diagonaled([X|XS],Y,[R|L]) :- Y1 is (Y-1),  elem(X,Y,R), diagonaled(XS,Y1,L).
 
-solutiondiag(S):- transp(S,TS), carres(S,CS), bonnetaille(S,9),verifie(CS),bonnetaille(TS,9), verifie(S),verifie(TS), diagonale(S,9,D1), diagonale(TS,9,D2), verifie([D1]), verifie([D2]).
+/*diagonaleg donne en 3em position la diagonale de : en haut à gauche vers en bas à droite*/
+diagonaleg([],_,[]).
+diagonaleg([X|XS],N,[R|L]) :- N1 is (N+1), elem(X,N1,R), diagonaleg(XS,N1,L).
+
+/*Ne fonctionne pas mais nous ne savons pas pourquoi*/
+solutiondiag(S):- transp(S,TS), carres(S,CS), bonnetaille(S,9),verifie(CS),bonnetaille(TS,9), verifie(S),verifie(TS), diagonaled(S,9,D1), diagonaleg(S,0,D2), verifie([D1]), verifie([D2]).
